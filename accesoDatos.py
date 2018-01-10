@@ -36,6 +36,7 @@ def accesoDatos(rutaAccesoFichero, nombre, apellidos, datos):
 						seguir = False
 					elif nuevoCliente == "N":
 						print("Entendemos que es una decisión difícil. Si cambia de opinión, estaremos encantados de volver a atenderle.")
+						return None
 						seguir = False
 					else:
 						error = 1			
@@ -102,13 +103,14 @@ def abrirCuenta(rutaAccesoFichero, nombre, apellidos, datos):
 	datos.append("0")
 	nuevaCuenta = open(rutaAccesoFichero, 'w')
 	nuevaCuenta.write("Nombre, Apellidos, Dirección, Teléfono, NIF, Saldo" )
-	fichero.write("\n" + time.strftime("%d/%m/%Y") + "     " + time.strftime("%H:%M:%S") + "     Creación de una nueva cuenta")
+	nuevaCuenta.write("\n" + time.strftime("%d/%m/%Y") + "     " + time.strftime("%H:%M:%S") + "     Creación de una nueva cuenta")
 	nuevaCuenta.write("\n" + ", ".join(datos))	
 	nuevaCuenta.close()
 	ultimaSesion(rutaAccesoFichero)
 
 
 def ultimaSesion(rutaAccesoFichero):
+	print(rutaAccesoFichero)
 	fichero = open(rutaAccesoFichero, 'r')
 	historial = [linea for linea in fichero]
 	fichero.close()
@@ -175,11 +177,11 @@ def transacciones(actual):
 			break	
 
 		else:
-			print("Por favor, introduzca solo un número.")
-			print("Para retirar diner, pulse 1.")
-			print("Para ingresar dinero, pulse 2.")
-			print("Para consultar el estado de su cuenta, pulse 3.")
-			print("Si no desea hacer ningún trámite, pulse 4.")	
+			posibilidades = ["Por favor, introduzca solo un número.", "Para retirar diner, pulse 1.", "Para ingresar dinero, pulse 2.", "Para consultar el estado de su cuenta, pulse 3.", "Si no desea hacer ningún trámite, pulse 4."]
+			for posibilidad in posibilidades:
+				print(posibilidad)
+				time.sleep(0.5)
+
 				
-		fichero.write("\n" + str(actual.getDatosCompletos()))
-		fichero.close()
+	fichero.write("\n" + str(actual.getDatosCompletos()))
+	fichero.close()
